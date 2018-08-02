@@ -36,10 +36,25 @@ struct Cmd
     public float forwardMove;
     public float rightMove;
     public float upMove;
+    
+    
+    
+    
+    
+    
+    
 }
 
 public class GMSPlayer : MonoBehaviour
 {
+
+    Animator m_Animator;
+    float m_Forward;
+    float m_Side;
+    
+
+
+
     public Transform playerView;     // Camera
     public float playerViewYOffset = 0.6f; // The height at which the camera is bound to
     public float xMouseSensitivity = 30.0f;
@@ -104,10 +119,28 @@ public class GMSPlayer : MonoBehaviour
             transform.position.z);
 
         _controller = GetComponent<CharacterController>();
+        
+        
+        
+        
+        m_Animator = gameObject.GetComponent<Animator>();
+        
+        
     }
 
     private void Update()
     {
+    
+    
+    m_Forward = _cmd.forwardMove;
+    m_Sideways = _cmd.rightMove;
+    
+    m_Animator.SetFloat("forwardSpeed", m_Forward);
+    m_Animator.SetFloat("rightSpeed", m_Sideways);
+    
+    
+    
+    
         // Do FPS calculation
         frameCount++;
         dt += Time.deltaTime;
